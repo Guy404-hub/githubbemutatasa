@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A GitHub bemutatása</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF1F7;--surface:#fff;--ink:#16213E;--muted:#55607A;--line:#CBD4E3;--accent:#4F3FE0;--l0:#4F3FE0;--l1:#E8663D;--l2:#0E9A76;--l3:#B88410;--g1:#DDD8FF;--g2:#FFE1D6}
+@media(prefers-color-scheme:dark){:root{--bg:#0F1526;--surface:#18203A;--ink:#E8ECF7;--muted:#9AA6C4;--line:#2C3759;--accent:#8F86FF;--l0:#8F86FF;--l1:#FF8A63;--l2:#33CFA6;--l3:#E6B73C;--g1:#262063;--g2:#0F3A4A}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:radial-gradient(700px 380px at 8% 0,var(--g1),transparent 70%) no-repeat,radial-gradient(620px 380px at 96% 6%,var(--g2),transparent 70%) no-repeat,var(--bg);color:var(--ink);font:17px/1.6 'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;line-height:1.1;letter-spacing:-.02em;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+nav{display:flex;flex-wrap:wrap;gap:6px 22px;padding:20px 0 0}
+nav a{color:var(--muted);text-decoration:none;font-weight:600}
+nav a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero{padding:44px 0 20px}
+h1{font-size:clamp(2.7rem,9vw,5.8rem);font-weight:800}
+.lead{max-width:58ch;color:var(--muted);font-size:1.15rem;margin:18px 0 0}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:30px}
+.lab h2{font-size:1.4rem;margin-bottom:4px}
+.lab p.sub{margin:0 0 14px;color:var(--muted);font-size:.95rem}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:inherit;font-weight:600;padding:9px 16px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--bg)}
+.btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
+.graph{overflow-x:auto;margin-top:14px;border-radius:12px;background:var(--bg)}
+.say{margin:12px 0 0;min-height:3.4em}
+section{padding:56px 0 8px}
+h2.t{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:14px}
+.txt{max-width:62ch;color:var(--muted);margin:0 0 12px}
+.feat{display:grid;grid-template-columns:220px 1fr;gap:22px;margin-top:22px}
+.tabs{display:flex;flex-direction:column;gap:3px}
+.tab{font:inherit;font-weight:600;text-align:left;padding:10px 14px;border:0;border-left:4px solid transparent;border-radius:10px;background:transparent;color:var(--ink);cursor:pointer}
+.tab:hover{background:var(--surface)}
+.tab[aria-selected=true]{background:var(--surface);border-left-color:var(--accent);color:var(--accent)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;animation:in .25s ease}
+@keyframes in{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+.panel h3{font-size:2.1rem;margin-bottom:6px}
+.panel .tag{color:var(--muted);margin:0 0 18px}
+.panel dt{font-weight:600;color:var(--accent);margin-top:14px}
+.panel dd{margin:2px 0 0;max-width:60ch}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px}
+.card h3{font-size:1.6rem;margin-bottom:8px}
+.card ul{margin:10px 0 0;padding-left:20px;color:var(--muted)}
+.bar{height:8px;border-radius:8px;background:var(--line);margin:18px 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--l2);transition:width .3s}
+ol.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.step.done{border-color:var(--l2)}
+.step label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-weight:600}
+.step input{width:20px;height:20px;margin-top:3px;accent-color:var(--l2)}
+.step p{margin:4px 0 0 32px;color:var(--muted);font-weight:400}
+.code{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:10px 0 0 32px;background:var(--bg);border-radius:10px;padding:8px 8px 8px 14px}
+.code code{font:.92rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.cp{font:inherit;font-size:.85rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer;flex:none}
+:root[data-theme=ocean]{--bg:#E3F4F7;--surface:#fff;--ink:#0B2E3F;--muted:#4A6B79;--line:#B7DCE4;--accent:#0A7EA4;--l0:#0A7EA4;--l1:#F26B5B;--l2:#0E9A7C;--l3:#B7791F;--g1:#BFE9F2;--g2:#D9F5E6}
+:root[data-theme=sunset]{--bg:#FFF0E6;--surface:#fff;--ink:#3A1F2E;--muted:#7A5463;--line:#F0CDBB;--accent:#D6336C;--l0:#D6336C;--l1:#E67700;--l2:#7048E8;--l3:#0C8599;--g1:#FFD6C2;--g2:#FFC9E0}
+:root[data-theme=forest]{--bg:#E9F2E4;--surface:#fff;--ink:#1E3326;--muted:#54705D;--line:#C3D8BA;--accent:#2F8F4E;--l0:#2F8F4E;--l1:#C96F1B;--l2:#2F78B8;--l3:#A63E8C;--g1:#CDE8C2;--g2:#F3E6B3}
+:root[data-theme=night]{--bg:#0C0A1F;--surface:#171433;--ink:#F0ECFF;--muted:#A9A3D0;--line:#2E2A5C;--accent:#B388FF;--l0:#B388FF;--l1:#FF7AB6;--l2:#4DE0C1;--l3:#FFD166;--g1:#2A1B5E;--g2:#0B3A4A}
+h1{background:linear-gradient(90deg,var(--l0),var(--l1));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+h2.t::after{content:"";display:block;width:72px;height:6px;border-radius:6px;margin-top:10px;background:linear-gradient(90deg,var(--l0),var(--l1),var(--l2))}
+.lab{box-shadow:0 24px 50px -30px var(--accent)}
+.btn.p{background:linear-gradient(135deg,var(--l0),var(--l1));border-color:transparent}
+.tab::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--fc);margin-right:10px}
+.tab[aria-selected=true]{border-left-color:var(--fc);color:var(--ink);background:color-mix(in srgb,var(--fc) 14%,var(--surface))}
+.panel{border-top:6px solid var(--fc,var(--accent));box-shadow:0 24px 50px -34px var(--fc,var(--accent))}
+.panel h3,.panel dt{color:var(--fc,var(--accent))}
+.chip{box-shadow:inset 0 -3px 0 var(--fc,var(--line))}
+.two .card:nth-child(1){border-top:6px solid var(--l1)}
+.two .card:nth-child(2){border-top:6px solid var(--l0)}
+.step{border-left:6px solid var(--l1)}
+.themes{margin-left:auto;display:flex;gap:8px;align-items:center}
+.sw{width:28px;height:28px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 2px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--accent)}
+.miss{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.badge{padding:4px 12px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted);font-size:.9rem;transition:.3s}
+.badge.on{border:1.5px solid var(--l2);background:var(--l2);color:var(--surface);font-weight:600;transform:scale(1.06)}
+.chip{font:inherit;font-size:.95rem;padding:8px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.term{margin-top:26px;background:#0F1526;color:#E8ECF7;border-radius:16px;padding:16px;font:.92rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.term:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+#tout{max-height:260px;overflow-y:auto}
+#tout div{white-space:pre-wrap}
+#tout .cmd{color:#8F86FF}#tout .err{color:#FF8A63}
+.term .row{display:flex;gap:8px;margin-top:6px}
+.term input{flex:1;background:transparent;border:0;color:inherit;font:inherit;outline:0}
+#hints{margin-top:12px;align-items:center}
+.cf{position:fixed;width:9px;height:9px;border-radius:2px;pointer-events:none;z-index:9}
+kbd{font:.85em ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:5px;padding:0 6px;background:var(--bg)}
+footer{padding:48px 0 60px;color:var(--muted);font-size:.95rem}
+@media(max-width:720px){.feat,.two{grid-template-columns:1fr}.tabs{flex-direction:row;overflow-x:auto}.tab{white-space:nowrap;border-left:0;border-bottom:4px solid transparent}.tab[aria-selected=true]{border-bottom-color:var(--fc)}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Oldalmenü"><a href="#mi">Mi ez?</a><a href="#funkciok">Funkciók</a><a href="#kulonbseg">Git és GitHub</a><a href="#kezdes">Kezdés</a><span class="themes" id="themes" role="group" aria-label="Színtéma"></span></nav>
+
+<header class="hero">
+  <h1>A GitHub bemutatása</h1>
+  <p class="lead">A GitHub egy weboldal, ahol a programkódod és bármilyen projekted előzményekkel együtt tárolható, és többen dolgozhattok rajta egyszerre. Alább kipróbálhatod, hogyan működik a lényege.</p>
+
+  <div class="lab">
+    <h2>Próbáld ki: így épül fel egy projekt története</h2>
+    <p class="sub">Minden kör egy commit, vagyis egy elmentett állapot. A vonalak az ágak (branch-ek).</p>
+    <div class="btns">
+      <button class="btn p" id="bC">Commit</button>
+      <button class="btn" id="bB">Új ág</button>
+      <button class="btn" id="bS">Ágváltás</button>
+      <button class="btn" id="bM">Beolvasztás a mainbe</button>
+      <button class="btn" id="bR">Újrakezdés</button>
+    </div>
+    <div class="graph" id="graph"></div>
+    <p class="say" id="say" aria-live="polite"></p>
+    <div class="miss" id="miss" aria-label="Küldetések"></div>
+    <p class="sub" style="margin:10px 0 0">Gyűjtsd be mind a négy jelvényt! Billentyűk: <kbd>C</kbd> commit, <kbd>B</kbd> ág, <kbd>S</kbd> váltás, <kbd>M</kbd> merge.</p>
+  </div>
+</header>
+
+<section id="mi">
+  <h2 class="t">Mi az a GitHub?</h2>
+  <p class="txt">A GitHub egy felhős szolgáltatás Git-tárolókhoz. Fejlesztők, diákok, cégek és nyílt forráskódú közösségek használják kód, dokumentáció vagy akár egy weboldal közös kezelésére.</p>
+  <p class="txt">Három fő okból népszerű: nem vész el semmi (minden változás visszakövethető), többen dolgozhattok ugyanazon, és a munkafolyamatok nagy része automatizálható.</p>
+</section>
+
+<section id="funkciok">
+  <h2 class="t">Funkciók: mi mire jó?</h2>
+  <p class="txt">Kattints egy funkcióra, vagy válaszd ki, mi a helyzeted, és megmutatjuk, melyik segít.</p>
+  <div class="btns" id="sc"></div>
+  <div class="feat">
+    <div class="tabs" role="tablist" aria-label="GitHub funkciók" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="kulonbseg">
+  <h2 class="t">Git és GitHub: mi a különbség?</h2>
+  <div class="two">
+    <div class="card"><h3>Git</h3>
+      <p class="txt">Ingyenes program a saját gépeden. A változásokat követi, internet nélkül is működik.</p>
+      <ul><li>Verziókezelő eszköz</li><li>Parancssorból használod</li><li>Magát a „mentési előzményt” kezeli</li></ul></div>
+    <div class="card"><h3>GitHub</h3>
+      <p class="txt">Webes szolgáltatás, amely Git-tárolókat tárol az interneten, és ráépít együttműködési eszközöket.</p>
+      <ul><li>Online tárhely a projektnek</li><li>Pull requestek, issue-k, automatizálás</li><li>Közösség: mások kódját is láthatod és javíthatod</li></ul></div>
+  </div>
+</section>
+
+<section id="kezdes">
+  <h2 class="t">Hogyan kezdj hozzá?</h2>
+  <p class="txt">Öt lépés az első változtatásodig. Pipáld ki, amit már megcsináltál.</p>
+  <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+  <div id="pt" style="color:var(--muted);font-size:.95rem"></div>
+  <ol class="steps" id="steps"></ol>
+  <h3 style="margin-top:36px;font-size:1.6rem">Gyakorló terminál</h3>
+  <p class="txt">Itt semmit nem tudsz elrontani. Gépeld be a parancsokat, vagy kattints a javasolt következő lépésre.</p>
+  <div class="term"><div id="tout" aria-live="polite"></div><div class="row"><span>$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Parancs" placeholder="pl. git init"></div></div>
+  <div class="btns" id="hints"></div>
+</section>
+
+<footer>A GitHub bemutatása. Ez az oldal egyetlen önálló HTML fájl, internet nélkül is megnyitható.</footer>
+</div>
+
+<script>
+/* ---------- Git gráf ---------- */
+const LC=['var(--l0)','var(--l1)','var(--l2)','var(--l3)'];
+let S;
+const $=s=>document.querySelector(s);
+const say=t=>$('#say').textContent=t;
+function init(){S={c:[{id:0,lane:0,p:[],col:0}],br:{main:{lane:0,head:0,base:0}},cur:'main',k:0};say('Kiindulópont: a main ág egyetlen commitja. Próbáld ki a gombokat!');draw()}
+function freeLane(){const u=Object.values(S.br).map(b=>b.lane);for(let i=1;i<4;i++)if(!u.includes(i))return i;return -1}
+function commit(){const b=S.br[S.cur],id=S.c.length;S.c.push({id,lane:b.lane,p:[b.head],col:id});b.head=id;say(`Új commit a(z) „${S.cur}” ágon: a változtatás el lett mentve, az előzmény bővült.`);draw()}
+function branch(){const l=freeLane();if(l<0){say('Ebben a demóban legfeljebb 4 ág lehet egyszerre. Olvaszd be valamelyiket!');return}
+  S.k++;const n='funkcio-'+S.k,h=S.br[S.cur].head;S.br[n]={lane:l,head:h,base:h};S.cur=n;
+  say(`Új ág: „${n}”. Itt szabadon kísérletezhetsz, a main érintetlen marad. Nyomj egy Commitot!`);draw()}
+function sw(){const k=Object.keys(S.br);S.cur=k[(k.indexOf(S.cur)+1)%k.length];say(`Átváltottál erre: „${S.cur}”. A következő commit ide kerül.`);draw()}
+function merge(){
+  if(S.cur==='main'){say('Beolvasztani egy másik ágat lehet a mainbe. Hozz létre egy ágat, commitolj rajta, majd olvaszd be.');return}
+  const m=S.br.main,f=S.br[S.cur];
+  if(f.head===f.base){say('Ezen az ágon még nincs új commit, nincs mit beolvasztani.');return}
+  const id=S.c.length;S.c.push({id,lane:0,p:[m.head,f.head],col:id});m.head=id;
+  say(`Merge: a(z) „${S.cur}” változásai bekerültek a mainbe. GitHubon ezt általában pull requesttel teszed, utána az ág törölhető.`);
+  delete S.br[S.cur];S.cur='main';draw()}
+function draw(){
+  const X=i=>40+i*46,Y=l=>36+l*44,w=X(S.c.length)+90;let h='';
+  S.c.forEach(c=>c.p.forEach(p=>{const a=S.c[p],x1=X(a.col),y1=Y(a.lane),x2=X(c.col),y2=Y(c.lane),col=LC[Math.max(a.lane,c.lane)];
+    h+=y1===y2?`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="3"/>`
+    :`<path d="M${x1} ${y1}C${x1+30} ${y1} ${x2-30} ${y2} ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="3"/>`}));
+  const heads={};Object.entries(S.br).forEach(([n,b])=>(heads[b.head]=heads[b.head]||[]).push(n===S.cur?'HEAD → '+n:n));
+  S.c.forEach(c=>{const isH=heads[c.id],x=X(c.col),y=Y(c.lane);
+    h+=`<circle cx="${x}" cy="${y}" r="9" fill="${isH?LC[c.lane]:'var(--surface)'}" stroke="${LC[c.lane]}" stroke-width="3"/>`;
+    if(isH)h+=`<text x="${x}" y="${y+(c.lane===0?-18:30)}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)">${heads[c.id].join(', ')}</text>`});
+  $('#graph').innerHTML=`<svg width="${w}" height="210" viewBox="0 0 ${w} 210" role="img" aria-label="Commitok és ágak gráfja">${h}</svg>`;
+  $('#graph').scrollLeft=w}
+$('#bC').onclick=()=>{commit();check()};$('#bB').onclick=()=>{branch();check()};
+$('#bS').onclick=()=>{sw();if(Object.keys(S.br).length>1)award('s')};
+$('#bM').onclick=()=>{merge();check()};$('#bR').onclick=init;
+addEventListener('keydown',e=>{if(e.target.matches('input,textarea')||e.ctrlKey||e.metaKey||e.altKey)return;const k={c:'#bC',b:'#bB',s:'#bS',m:'#bM'}[e.key.toLowerCase()];if(k)$(k).click()});
+init();
+
+/* ---------- Funkciók ---------- */
+const F=[
+['Repository','A projekt „mappája” teljes előzménnyel.','Kódot, dokumentumot, képet tárolhatsz egy helyen, nyilvánosan vagy privátan.','Soha nem vész el semmi, és bárkivel megoszthatod a hozzáférést.'],
+['Commit','Egy elmentett változtatás rövid üzenettel.','A munkát kis, érthető lépésekre bontja.','Bármikor visszatérhetsz egy korábbi állapothoz, ha elrontottál valamit.'],
+['Branch (ág)','A projekt párhuzamos változata.','Új funkciót vagy javítást külön ágon próbálsz ki.','A működő főverzió nem sérül, amíg a kísérlet nincs kész.'],
+['Pull request','Javaslat az ág változásainak beolvasztására.','A csapat átnézi, megjegyzéseket fűz hozzá, majd jóváhagyja.','A hibák időben kiderülnek, és mindenki tud a változásokról.'],
+['Issues','Feladatok, hibajelentések, ötletek listája.','Nyilvántartod, mi a teendő, és ki dolgozik rajta.','Átlátható, mi van kész és mi vár, a beszélgetés a feladat mellett marad.'],
+['Actions','Automatizálás: tesztek, buildek, telepítés.','Egy változtatás után a GitHub magától lefuttatja a megadott lépéseket.','A gép végzi az ismétlődő munkát, kevesebb az emberi hiba.'],
+['Pages','Ingyenes weboldal-tárhely a tárolóból.','Portfólió, dokumentáció vagy projektoldal publikálható vele.','Nem kell szerver, és a push után az oldal frissül.'],
+['Projects','Kanban-tábla vagy táblázat a teendőkhöz.','Az issue-kat és pull requesteket oszlopokba rendezheted.','Egy pillantással látod a projekt állapotát.'],
+['Codespaces','Felhőben futó fejlesztői környezet.','Böngészőből szerkesztesz és futtatsz kódot, telepítés nélkül.','Bármelyik gépről azonnal ugyanabban a környezetben dolgozhatsz.'],
+['Copilot','MI-alapú kódsegéd.','Kódot javasol, magyaráz, hibát keres a szerkesztőben.','Gyorsabb haladás, főleg az unalmas, ismétlődő részeknél.'],
+['Biztonság','Dependabot, titokkereső és kódelemzés.','Figyelmeztet a sérülékeny függőségekre és a véletlenül feltöltött jelszavakra.','A problémák még azelőtt kiderülnek, hogy kárt okoznának.'],
+['Fork és csillag','A fork saját másolat, a csillag könyvjelző.','Nyílt forráskódú projekthez forkkal és pull requesttel járulhatsz hozzá.','Bárki részt vehet a közösségi fejlesztésben, a csillag pedig segít megtalálni a hasznos projekteket.']
+];
+const tabs=$('#tabs'),panel=$('#panel');
+F.forEach((f,i)=>{const b=document.createElement('button');b.className='tab';b.role='tab';b.textContent=f[0];b.style.setProperty('--fc',LC[i%4]);b.onclick=()=>show(i);tabs.appendChild(b)});
+function show(i){[...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',i===j));
+  const f=F[i];panel.style.setProperty('--fc',LC[i%4]);panel.style.animation='none';panel.offsetHeight;panel.style.animation='';
+  panel.innerHTML=`<h3>${f[0]}</h3><p class="tag">${f[1]}</p><dl><dt>Mire jó?</dt><dd>${f[2]}</dd><dt>Miért érdemes?</dt><dd>${f[3]}</dd></dl>`}
+show(0);
+
+/* ---------- Kezdés ---------- */
+const ST=[
+['Hozz létre egy fiókot','Regisztrálj ingyen a github.com oldalon.',''],
+['Telepítsd a Git-et','Töltsd le a git-scm.com oldalról, majd add meg a neved és az e-mail-címed.','git config --global user.name "Neved"'],
+['Másold le a tárolót','Nyiss egy tárolót GitHubon, majd klónozd a gépedre.','git clone https://github.com/felhasznalo/projekt.git'],
+['Mentsd el a változtatásokat','Szerkessz egy fájlt, aztán készíts belőle commitot.','git add .\ngit commit -m "Első változtatásom"'],
+['Töltsd fel GitHubra','A commit ezzel kerül fel az online tárolóba.','git push']
+];
+const ol=$('#steps');
+ST.forEach((s,i)=>{const li=document.createElement('li');li.className='step';
+  li.innerHTML=`<label><input type="checkbox"><span>${s[0]}</span></label><p>${s[1]}</p>`+(s[2]?`<div class="code"><code>${s[2]}</code><button class="cp">Másolás</button></div>`:'');
+  li.querySelector('input').onchange=e=>{li.classList.toggle('done',e.target.checked);prog()};
+  const cp=li.querySelector('.cp');if(cp)cp.onclick=()=>{try{navigator.clipboard.writeText(s[2]).then(()=>{cp.textContent='Másolva';setTimeout(()=>cp.textContent='Másolás',1500)})}catch(e){}};
+  ol.appendChild(li)});
+function prog(){const n=ol.querySelectorAll('input:checked').length;$('#prog').style.width=n/ST.length*100+'%';$('#pt').textContent=n===ST.length?'Kész, mostantól GitHubot használsz!':`${n} / ${ST.length} lépés kész`}
+prog();
+
+/* ---------- Küldetések és konfetti ---------- */
+const MS={c:'Első commit',b:'Első ág',s:'Ágváltás',m:'Első merge'},got=new Set();
+function renderM(){$('#miss').innerHTML=Object.entries(MS).map(([k,v])=>`<span class="badge${got.has(k)?' on':''}">${v}</span>`).join('')+(got.size===4?'<b>Mind a négy küldetés kész!</b>':'')}
+function award(k){if(got.has(k))return;got.add(k);renderM();if(got.size===4)confetti()}
+function check(){if(S.c.length>1)award('c');if(S.k>0)award('b');if(S.c.some(c=>c.p.length>1))award('m')}
+function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const r=$('#graph').getBoundingClientRect();
+  for(let i=0;i<46;i++){const e=document.createElement('i');e.className='cf';e.style.cssText=`left:${r.left+r.width/2}px;top:${r.top+60}px;background:${LC[i%4]}`;document.body.appendChild(e);
+    e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${(Math.random()-.5)*600}px,${Math.random()*400-100}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1400,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>e.remove()}}
+renderM();
+
+/* ---------- Helyzetválasztó ---------- */
+const SC=[['Visszamennék egy tegnapi állapothoz',1],['Újat próbálnék ki, de a működőt nem rontanám el',2],['Mások is nézzék át a változtatásaimat',3],['Hibát találtam valaki projektjében',4],['Minden push után lefusson egy teszt',5],['Ingyen weboldalt szeretnék',6],['Telepítés nélkül, böngészőben kódolnék',8],['Nyílt forráskódú projektbe javítanék bele',11]];
+SC.forEach(([t,i],j)=>{const b=document.createElement('button');b.className='chip';b.style.setProperty('--fc',LC[j%4]);b.textContent=t;b.onclick=()=>{show(i);panel.scrollIntoView({block:'nearest',behavior:'smooth'})};$('#sc').appendChild(b)});
+
+/* ---------- Gyakorló terminál ---------- */
+const T={i:0,a:0,r:0,n:[],p:0},tout=$('#tout'),tin=$('#tin');
+const out=(t,c)=>{const d=document.createElement('div');d.textContent=t;if(c)d.className=c;tout.appendChild(d);tout.scrollTop=tout.scrollHeight};
+const nxt=()=>!T.i?'git init':T.a?'git commit -m "Első commit"':!T.n.length?'git add .':!T.r?'git remote add origin https://github.com/te/projekt.git':T.n.length>T.p?'git push':null;
+function hint(){const n=nxt(),h=$('#hints');
+  h.innerHTML=n?`<span style="color:var(--muted)">Következő lépés:</span><button class="btn"></button>`:'<b>Kész! A projekted fent van a GitHubon.</b>';
+  if(n){const b=h.querySelector('button');b.textContent=n;b.style.fontFamily='ui-monospace,Menlo,Consolas,monospace';b.onclick=()=>{tin.value=n;run()}}}
+function run(){const v=tin.value.trim();tin.value='';if(!v)return;out('$ '+v,'cmd');const m=v.match(/^git commit -m ["']?(.+?)["']?$/);
+  if(v==='help')out('Parancsok: git init, git add ., git commit -m "üzenet", git status, git log, git remote add origin <url>, git push, clear');
+  else if(v==='clear')tout.innerHTML='';
+  else if(v==='git init'){T.i=1;out('Üres Git-tároló létrehozva ebben a mappában.')}
+  else if(!/^git /.test(v))out('Ismeretlen parancs. Írd be: help','err');
+  else if(!T.i)out('Ez a mappa még nem Git-tároló. Először: git init','err');
+  else if(v==='git add .'){T.a=1;out('A fájlok bekerültek a következő commitba (staging).')}
+  else if(m){if(!T.a)out('Nincs mit commitolni. Először: git add .','err');else{T.a=0;const h=Math.random().toString(16).slice(2,9);T.n.push(h+' '+m[1]);out(`[main ${h}] ${m[1]}\n 1 fájl módosítva`)}}
+  else if(v==='git status')out(T.a?'Commitra váró változtatások vannak (staging).':'Nincs commitra váró változtatás.');
+  else if(v==='git log')out(T.n.length?T.n.slice().reverse().join('\n'):'Még nincs commit.');
+  else if(/^git remote add origin \S+$/.test(v)){T.r=1;out('Távoli tároló beállítva: origin.')}
+  else if(v==='git push'){if(!T.r)out('Nincs távoli tároló. Használd: git remote add origin <url>','err');else if(!T.n.length)out('Nincs mit feltölteni, még nincs commit.','err');else{T.p=T.n.length;out('Feltöltés a GitHubra... kész. A változtatásaid mostantól online is elérhetők.')}}
+  else out('Ezt a parancsot ez a gyakorló terminál nem ismeri. Írd be: help','err');
+  hint()}
+tin.onkeydown=e=>{if(e.key==='Enter')run()};
+
+/* ---------- Színtémák ---------- */
+const TH=[['auto','Automatikus (világos/sötét)','linear-gradient(135deg,#fff 50%,#16213E 50%)'],['ocean','Óceán','linear-gradient(135deg,#0A7EA4,#0E9A7C)'],['sunset','Naplemente','linear-gradient(135deg,#D6336C,#E67700)'],['forest','Erdő','linear-gradient(135deg,#2F8F4E,#C96F1B)'],['night','Éjszaka','linear-gradient(135deg,#B388FF,#0C0A1F)']];
+function setTheme(t){const r=document.documentElement;t==='auto'?r.removeAttribute('data-theme'):r.dataset.theme=t;
+  [...$('#themes').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
+  try{localStorage.setItem('gh-theme',t)}catch(e){}
+  draw()}
+TH.forEach(([k,n,g])=>{const b=document.createElement('button');b.className='sw';b.dataset.t=k;b.title=n;b.setAttribute('aria-label','Téma: '+n);b.style.background=g;b.onclick=()=>setTheme(k);$('#themes').appendChild(b)});
+let saved='auto';try{saved=localStorage.getItem('gh-theme')||'auto'}catch(e){}
+setTheme(TH.some(x=>x[0]===saved)?saved:'auto');
+out('Gyakorló terminál. Írd be: help, vagy kattints a javasolt lépésre.');hint();
+</script>
+</body>
+</html>
